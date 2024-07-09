@@ -59,23 +59,41 @@ public class EntryController
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Entry addCategory(@RequestBody Entry category)
+    public Entry addEntry(@RequestBody Entry entry)
     {
-        return entryDao.create(category);
+        try {
+            return entryDao.createEntry(entry);
+        } catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Add entry didn't work");
+        }
     }
 
-    @PutMapping("{categoryId}")
+    @PutMapping("/{entryId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void updateCategory(@PathVariable int categoryId, @RequestBody Entry category)
+    public void updateEntry(@PathVariable int entryId, @RequestBody Entry entry)
     {
-        entryDao.update(categoryId, category);
+        try {
+            entryDao.updateEntry(entryId, entry);
+        } catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Update entry didn't work");
+        }
     }
 
-    @DeleteMapping("{categoryId}")
+    @DeleteMapping("/{entryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void deleteCategory(@PathVariable int categoryId)
+    public void deleteEntry(@PathVariable int entryId)
     {
-        entryDao.delete(categoryId);
+        try {
+            var entry = entryDao.getEntryById(entryId);
+
+            if (entry == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+            entryDao.deleteEntry(entryId);
+        }
+        catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Delete entry didn't work!");
+        }
     }
 }
