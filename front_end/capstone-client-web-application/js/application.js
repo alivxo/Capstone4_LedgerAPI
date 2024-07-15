@@ -1,128 +1,101 @@
-
-function showLoginForm()
-{
-    templateBuilder.build('login-form', {}, 'login');
+function showLoginForm() {
+	templateBuilder.build('login-form', {}, 'login')
 }
 
-function hideModalForm()
-{
-    templateBuilder.clear('login');
+function hideModalForm(type) {
+	templateBuilder.clear(type)
 }
 
-function login()
-{
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+function login() {
+	const username = document.getElementById('username').value
+	const password = document.getElementById('password').value
 
-    userService.login(username, password);
-    hideModalForm()
+	userService.login(username, password)
+	hideModalForm('login')
 }
 
-function showImageDetailForm(product, imageUrl)
-{
-    const imageDetail = {
-        name: product,
-        imageUrl: imageUrl
-    };
+function loadHome() {
+	templateBuilder.build('home', {}, 'main')
 
-    templateBuilder.build('image-detail',imageDetail,'login')
+	entryService.search()
 }
 
-function loadHome()
-{
-    templateBuilder.build('home',{},'main')
-
-    productService.search();
-    categoryService.getAllCategories(loadCategories);
+function editProfile() {
+	profileService.loadProfile()
 }
 
-function editProfile()
-{
-    profileService.loadProfile();
+function saveProfile() {
+	const firstName = document.getElementById('firstName').value
+	const lastName = document.getElementById('lastName').value
+	const phone = document.getElementById('phone').value
+	const email = document.getElementById('email').value
+	const address = document.getElementById('address').value
+	const city = document.getElementById('city').value
+	const state = document.getElementById('state').value
+	const zip = document.getElementById('zip').value
+
+	const profile = {
+		firstName,
+		lastName,
+		phone,
+		email,
+		address,
+		city,
+		state,
+		zip,
+	}
+
+	profileService.updateProfile(profile)
 }
 
-function saveProfile()
-{
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const address = document.getElementById("address").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const zip = document.getElementById("zip").value;
-
-    const profile = {
-        firstName,
-        lastName,
-        phone,
-        email,
-        address,
-        city,
-        state,
-        zip
-    };
-
-    profileService.updateProfile(profile);
+function setFilter(control) {
+	entryService.addFilter(control.value)
+	entryService.search()
 }
 
-function showCart()
-{
-    cartService.loadCartPage();
+function setMinAmount(control) {
+	// const slider = document.getElementById("min-price");
+	const label = document.getElementById('min-amount-display')
+	label.innerText = control.value
+
+	const value = control.value != 0 ? control.value : ''
+	entryService.addMinPriceFilter(value)
+	entryService.search()
 }
 
-function clearCart()
-{
-    cartService.clearCart();
-    cartService.loadCartPage();
+function setMaxAmount(control) {
+	// const slider = document.getElementById("min-price");
+	const label = document.getElementById('max-amount-display')
+	label.innerText = control.value
+
+	const value = control.value != 10000 ? control.value : ''
+	entryService.addMaxPriceFilter(value)
+	entryService.search()
 }
 
-function setCategory(control)
-{
-    productService.addCategoryFilter(control.value);
-    productService.search();
-
+function showNewEntryModal() {
+	templateBuilder.build('newEntryForm', {}, 'newEntry')
 }
 
-function setColor(control)
-{
-    productService.addColorFilter(control.value);
-    productService.search();
+function createEntry() {
+	const description = document.getElementById('description').value
+	const vendor = document.getElementById('vendor').value
+	const amount = document.getElementById('amount').value
 
+	entryService.createEntry(description, vendor, amount)
+	hideModalForm('newEntry')
 }
 
-function setMinPrice(control)
-{
-    // const slider = document.getElementById("min-price");
-    const label = document.getElementById("min-price-display")
-    label.innerText = control.value;
-
-    const value = control.value != 0 ? control.value : "";
-    productService.addMinPriceFilter(value)
-    productService.search();
-
+function deleteEntry(entryId) {
+	entryService.deleteEntry(entryId)
 }
 
-function setMaxPrice(control)
-{
-    // const slider = document.getElementById("min-price");
-    const label = document.getElementById("max-price-display")
-    label.innerText = control.value;
-
-    const value = control.value != 1500 ? control.value : "";
-    productService.addMaxPriceFilter(value)
-    productService.search();
-
-}
-
-function closeError(control)
-{
-    setTimeout(() => {
-        control.click();
-    },3000);
+function closeError(control) {
+	setTimeout(() => {
+		control.click()
+	}, 3000)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    loadHome();
-});
+	loadHome()
+})

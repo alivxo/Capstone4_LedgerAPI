@@ -1,0 +1,38 @@
+<div id="newEntryForm" class="modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">New Entry</h5>
+				<button
+					type="button"
+					class="btn-close"
+					onclick="hideModalForm()"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="description" placeholder="description" />
+					<label for="description">Description</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="vendor" placeholder="vendor" />
+					<label for="vendor">Vendor</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="number" class="form-control" id="amount" placeholder="amount" />
+					<label for="amount">Amount</label>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" onclick="hideModalForm('newEntry')">
+					Cancel
+				</button>
+				<button type="button" class="btn btn-primary" onclick="createEntry()">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>

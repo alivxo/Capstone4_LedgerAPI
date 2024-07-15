@@ -1,0 +1,21 @@
+<div id="entryTable">
+	<div id="entryHeader">
+		<h2>Entries ({{length}})</h2>
+		<button onclick="showNewEntryModal()"><i class="fa fa-plus"></i> New Entry</button>
+	</div>
+	<div id="entries">
+		{{#entries}}
+		<div class="entry">
+			<div id="entryInfo">
+				<span>{{index}}</span>
+				<span>Description: {{description}}</span>
+				<span>Vendor: {{vendor}}</span>
+				<span>Amount: ${{amount}}</span>
+				<button id="entry{{entryId}}" class="btn" onclick="deleteEntry('{{entryId}}')">
+					<i class="fa fa-trash"></i>
+				</button>
+			</div>
+		</div>
+		{{/entries}}
+	</div>
+</div>

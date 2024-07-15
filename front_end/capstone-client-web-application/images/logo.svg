@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <text x="150" y="65" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#4a90e2">LedgerAPI</text>
+  <path d="M30 50 L50 50 M60 40 L60 60 M70 50 L90 50" stroke="#4a90e2" stroke-width="4" stroke-linecap="round"/>
+</svg>

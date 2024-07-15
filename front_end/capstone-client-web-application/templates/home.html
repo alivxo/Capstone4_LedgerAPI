@@ -1,55 +1,46 @@
+{{#loggedin}}
 <div class="filter-box">
-    <h3>Filter</h3>
+	<h3>Filter Entries</h3>
 
-    <div class="form-floating mb-3">
-        <select name="" id="category-select" class="form-select"
-            onchange="setCategory(this)"
-        >
-            <option value="0">Show All</option>
-        </select>
-        <label for="category-select">Category</label>
-    </div>
-    <div>
-        <label for="min-price" class="form-label">Minimum Price: $ <span id="min-price-display">0</span></label>
-        <input type="range" class="form-range" id="min-price" min="0" max="1500" value="0" onchange="setMinPrice(this)">
-    </div>
-    <div>
-        <label for="max-price" class="form-label">Maximum Price: $ <span id="max-price-display">1500</span></label>
-        <input type="range" class="form-range" id="max-price" min="0" max="1500" value="1500" onchange="setMaxPrice(this)">
-    </div>
+	<div>
+		<label for="min-amount" class="form-label"
+			>Minimum Amount: $ <span id="min-amount-display">0</span></label
+		>
+		<input
+			type="range"
+			class="form-range"
+			id="min-amount"
+			min="0"
+			max="10000"
+			value="0"
+			onchange="setMinAmount(this)"
+		/>
+	</div>
+	<div>
+		<label for="max-amount" class="form-label"
+			>Maximum Amount: $ <span id="max-amount-display">10000</span></label
+		>
+		<input
+			type="range"
+			class="form-range"
+			id="max-amount"
+			min="0"
+			max="10000"
+			value="10000"
+			onchange="setMaxAmount(this)"
+		/>
+	</div>
 
-    <div class="form-floating mb-3">
-        <select name="" id="color-select" class="form-select"
-                onchange="setColor(this)"
-        >
-            <option value="">Show All</option>
-            <option>Black</option>
-            <option>Blue</option>
-            <option>Brown</option>
-            <option>Burgundy</option>
-            <option>Charcoal</option>
-            <option>Clear</option>
-            <option>Dark BLue</option>
-            <option>Gray</option>
-            <option>Green</option>
-            <option>Khaki</option>
-            <option>Lavender</option>
-            <option>Maroon</option>
-            <option>Mint</option>
-            <option>Navy</option>
-            <option>Olive</option>
-            <option>Orange</option>
-            <option>Pink</option>
-            <option>Red</option>
-            <option>Silver</option>
-            <option>Tan</option>
-            <option>Teal</option>
-            <option>Turquoise</option>
-            <option>White</option>
-            <option>Yellow</option>
-        </select>
-        <label for="color-select">Color</label>
-    </div>
-
+	<div class="form-floating mb-3">
+		<select name="" id="filter-select" class="form-select" onchange="setFilter(this)">
+			<option value="">Show All</option>
+			<option>Previous Year</option>
+			<option>YTD</option>
+			<option>Previous Month</option>
+			<option>MTD</option>
+		</select>
+		<label for="filter-select">Custom Reports</label>
+	</div>
 </div>
 <div id="content" class="content"></div>
+{{/loggedin}}
