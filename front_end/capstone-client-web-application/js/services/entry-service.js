@@ -6,6 +6,7 @@ class EntryService {
 		vendor: undefined,
 		minAmount: undefined,
 		maxAmount: undefined,
+		customReport: undefined,
 		queryString: () => {
 			let qs = ''
 			if (this.filter.description) {
@@ -40,8 +41,8 @@ class EntryService {
 					qs = maxA
 				}
 			}
-			if (this.filter.filter) {
-				const fil = `custom=${this.filter.filter}`
+			if (this.filter.customReport) {
+				const fil = `customReport=${this.filter.customReport}`
 				if (qs.length > 0) {
 					qs += `&${fil}`
 				} else {
@@ -63,7 +64,7 @@ class EntryService {
 	}
 	addFilter(filter) {
 		if (filter == '') this.clearFilter()
-		else this.filter.filter = filter
+		else this.filter.customReport = filter
 	}
 
 	clearMinAmountFilter() {
@@ -73,7 +74,7 @@ class EntryService {
 		this.filter.maxAmount = undefined
 	}
 	clearFilter() {
-		this.filter.filter = undefined
+		this.filter.customReport = undefined
 	}
 
 	search() {
