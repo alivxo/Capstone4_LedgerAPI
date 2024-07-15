@@ -1,19 +1,22 @@
 package org.yearup.models;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 public class Entry {
     private int entryId;
     private String description;
     private String vendor;
     private BigDecimal amount;
+    private Date datetime;
 
 
-    public Entry(int entryId, String description, String vendor, BigDecimal amount) {
+    public Entry(int entryId, String description, Date datetime, String vendor, BigDecimal amount) {
         this.entryId = entryId;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+        this.datetime = datetime;
     }
 
     public int getEntryId() {
@@ -46,5 +49,13 @@ public class Entry {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 }

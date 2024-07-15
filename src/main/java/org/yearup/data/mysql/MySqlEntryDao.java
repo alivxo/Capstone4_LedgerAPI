@@ -99,10 +99,11 @@ public class MySqlEntryDao extends MySqlDaoBase implements EntryDao {
     private Entry mapRow(ResultSet row) throws SQLException {
         int entryId = row.getInt("entry_id");
         String description = row.getString("description");
+        Date datetime = row.getDate("datetime");
         String vendor = row.getString("vendor");
         BigDecimal amount = row.getBigDecimal("amount");
 
-        return new Entry(entryId, description, vendor, amount);
+        return new Entry(entryId, description, datetime, vendor, amount);
     }
 
 
@@ -128,14 +129,15 @@ public class MySqlEntryDao extends MySqlDaoBase implements EntryDao {
     @Override
     public Entry createEntry(Entry entry) {
 //TODO Figure out what information I need to insert into the database. Make date and time optional.
-        String createSQL = "INSERT INTO entries (description, vendor, amount) VALUES (?, ?, ?)";
+        String createSQL = "INSERT INTO entries (description, datetime, vendor, amount) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement(createSQL, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, entry.getDescription());
-            ps.setString(2, entry.getVendor());
-            ps.setBigDecimal(3, entry.getAmount());
+            ps.setDate(2, entry.getDatetime() == null ? new java.sql.Date(System.currentTimeMillis()) : entry.getDatetime());
+            ps.setString(3, entry.getVendor());
+            ps.setBigDecimal(4, entry.getAmount());
 
             ps.executeUpdate();
 

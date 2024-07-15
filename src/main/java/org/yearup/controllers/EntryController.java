@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("entries")
 @CrossOrigin
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 public class EntryController {
     private final EntryDao entryDao;
 
@@ -59,7 +60,6 @@ public class EntryController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Entry addEntry(@RequestBody Entry entry)
     {
         try {
@@ -70,7 +70,6 @@ public class EntryController {
     }
 
     @PutMapping("/{entryId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateEntry(@PathVariable int entryId, @RequestBody Entry entry)
     {
         try {
@@ -82,7 +81,6 @@ public class EntryController {
 
     @DeleteMapping("/{entryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteEntry(@PathVariable int entryId)
     {
         try {

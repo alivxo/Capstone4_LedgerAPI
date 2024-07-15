@@ -79,10 +79,11 @@ function showNewEntryModal() {
 
 function createEntry() {
 	const description = document.getElementById('description').value
+	const date = document.getElementById('date').value
 	const vendor = document.getElementById('vendor').value
 	const amount = document.getElementById('amount').value
 
-	entryService.createEntry(description, vendor, amount)
+	entryService.createEntry(description, date, vendor, amount)
 	hideModalForm('newEntry')
 }
 

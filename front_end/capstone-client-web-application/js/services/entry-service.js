@@ -91,6 +91,7 @@ class EntryService {
 					length: response.data.length,
 				}
 
+				console.log(data)
 				templateBuilder.build('entries', data, 'content')
 			})
 			.catch(error => {
@@ -102,9 +103,9 @@ class EntryService {
 			})
 	}
 
-	createEntry(description, vendor, amount) {
+	createEntry(description, date, vendor, amount) {
 		const url = `${config.baseUrl}/entries`
-		console.log(description, vendor, amount)
+		console.log(description, date, vendor, amount)
 		axios
 			.post(url, {
 				withCredentials: false, // This helps with CORS issues if credentials are needed
@@ -114,6 +115,7 @@ class EntryService {
 				},
 				entryId: 0,
 				description: description,
+				datetime: date,
 				vendor: vendor,
 				amount: amount,
 			})
